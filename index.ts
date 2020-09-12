@@ -1,30 +1,30 @@
-let canvasEl = <HTMLCanvasElement>document.getElementById( "canvas" );
-let c = new CanvasApi( canvasEl );
+let c = CanvasApi.forId( 'canvas' );
+let picker = CanvasApi.forId( 'picker' );
 let colors = new Colors();
-c.drawLine( 0, 0, 100, 200 );
-c.setLineColor( 'red' );
-c.drawRect( 10, 10, 20, 20 );
+// picker.drawLine( 0, 0, 100, 200 );
+// picker.setLineColor( 'red' );
+// picker.drawRect( 10, 10, 20, 20 );
 
+let pixel = 20;
+
+let y = 0;
+let x = 0;
 for( let i = 0; i < 100; i++ ) {
-  c.setFillColor( colors.getColorForIndex( i ) );
-  c.fillRect( i * 5, i * 5, 5, 5 );
+  picker.setFillColor( colors.getColorForIndex( i ) );
+  picker.fillRect( x * pixel, y * pixel, pixel, pixel );
+  x++;
+  if( x > 400 / pixel ) {
+    x = 0;
+    y++;
+  }
 }
 
 c.setFillColor( 'red' );
 
-let ed = new SpriteEditor( c, 1, 1, );
+let ed = new SpriteEditor( c, pixel, pixel, );
+new ColorPicker( picker, ( color ) => {
+  console.log( color );
+  ed.setPenColor( color );
+});
 
-// c.onMouse( 'mousedown', function( x: number, y:number, e: MouseEvent ) {
-//   c.fillRect( x, y, 5, 5 );
-// });
-
-// canvasEl.addEventListener( 'mousedown', function( event ) {
-//   let x = event.offsetX;
-//   let y = event.offsetY;
-//   c.fillRect( x, y, 10, 10 );
-// });
-
-// c.handleMouse( ( x : number, y : number , ev : MouseEvent ) => {
-//     console.log( ev.offsetX + ":" + ev.offsetY );
-// } );
 

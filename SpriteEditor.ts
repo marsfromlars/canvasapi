@@ -26,9 +26,14 @@ class SpriteEditor {
     this.canvas.onMouse( 'mousemove', (x,y,e) => {
       if( this.penActive ) {
         if( this.mousedown ) {
+          x = Math.floor( x / this.scaleX );
+          y = Math.floor( y / this.scaleY );
           this.setPixel( x, y, this.penColor );
         }
       }
+    });
+    this.canvas.onMouse( 'mouseleave', (x,y,e) =>{
+      this.mousedown = false;
     });
   }
 
@@ -38,6 +43,7 @@ class SpriteEditor {
 
   setPenColor( penColor: string ) {
     this.penColor = penColor;
+    this.canvas.setFillColor( penColor );
   }
 
   setPenWidth( penWidth: number ) {

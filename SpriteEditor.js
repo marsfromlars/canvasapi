@@ -18,9 +18,14 @@ var SpriteEditor = /** @class */ (function () {
         this.canvas.onMouse('mousemove', function (x, y, e) {
             if (_this.penActive) {
                 if (_this.mousedown) {
+                    x = Math.floor(x / _this.scaleX);
+                    y = Math.floor(y / _this.scaleY);
                     _this.setPixel(x, y, _this.penColor);
                 }
             }
+        });
+        this.canvas.onMouse('mouseleave', function (x, y, e) {
+            _this.mousedown = false;
         });
     };
     SpriteEditor.prototype.setPixel = function (x, y, color) {
@@ -28,6 +33,7 @@ var SpriteEditor = /** @class */ (function () {
     };
     SpriteEditor.prototype.setPenColor = function (penColor) {
         this.penColor = penColor;
+        this.canvas.setFillColor(penColor);
     };
     SpriteEditor.prototype.setPenWidth = function (penWidth) {
         this.penWidth = penWidth;

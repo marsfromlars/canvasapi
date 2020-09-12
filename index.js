@@ -1,23 +1,24 @@
-var canvasEl = document.getElementById("canvas");
-var c = new CanvasApi(canvasEl);
+var c = CanvasApi.forId('canvas');
+var picker = CanvasApi.forId('picker');
 var colors = new Colors();
-c.drawLine(0, 0, 100, 200);
-c.setLineColor('red');
-c.drawRect(10, 10, 20, 20);
+// picker.drawLine( 0, 0, 100, 200 );
+// picker.setLineColor( 'red' );
+// picker.drawRect( 10, 10, 20, 20 );
+var pixel = 20;
+var y = 0;
+var x = 0;
 for (var i = 0; i < 100; i++) {
-    c.setFillColor(colors.getColorForIndex(i));
-    c.fillRect(i * 5, i * 5, 5, 5);
+    picker.setFillColor(colors.getColorForIndex(i));
+    picker.fillRect(x * pixel, y * pixel, pixel, pixel);
+    x++;
+    if (x > 400 / pixel) {
+        x = 0;
+        y++;
+    }
 }
 c.setFillColor('red');
-var ed = new SpriteEditor(c, 1, 1);
-// c.onMouse( 'mousedown', function( x: number, y:number, e: MouseEvent ) {
-//   c.fillRect( x, y, 5, 5 );
-// });
-// canvasEl.addEventListener( 'mousedown', function( event ) {
-//   let x = event.offsetX;
-//   let y = event.offsetY;
-//   c.fillRect( x, y, 10, 10 );
-// });
-// c.handleMouse( ( x : number, y : number , ev : MouseEvent ) => {
-//     console.log( ev.offsetX + ":" + ev.offsetY );
-// } );
+var ed = new SpriteEditor(c, pixel, pixel);
+new ColorPicker(picker, function (color) {
+    console.log(color);
+    ed.setPenColor(color);
+});

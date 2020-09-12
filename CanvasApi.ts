@@ -1,7 +1,7 @@
 type MouseCallback = ( x: number, y: number, e: MouseEvent ) => void;
 
 class CanvasApi {
-
+  
   canvasEl: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
 
@@ -10,6 +10,10 @@ class CanvasApi {
     this.canvasEl = canvasEl;
     this.ctx = canvasEl.getContext( "2d" );
 
+  }
+
+  static forId( canvasId: string ) : CanvasApi {
+    return new CanvasApi( <HTMLCanvasElement>document.getElementById( canvasId ) );
   }
 
   drawLine( x: number, y: number, x1: number, y1: number ) {
@@ -32,6 +36,17 @@ class CanvasApi {
 
   setFillColor( c: string ) {
     this.ctx.fillStyle = c;
+  }
+
+  getColorAt(x: number, y: number): string {
+    var p = this.ctx.getImageData(x, y, 1, 1).data; 
+    return "#" + ( ("000000" + this.rgbToHex(p[0], p[1], p[2])).slice(-6) ).toUpperCase();
+  }
+
+  rgbToHex = function(r, g, b) {
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
   }
 
   onMouse( mouseaction: string, callback: ( x: number, y: number, e: MouseEvent ) => void ) {
