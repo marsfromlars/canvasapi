@@ -22,3 +22,4 @@ new ColorPicker(picker, function (color) {
     console.log(color);
     ed.setPenColor(color);
 });
+//# sourceMappingURL=index.js.map

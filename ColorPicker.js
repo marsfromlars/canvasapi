@@ -15,3 +15,4 @@ var ColorPicker = /** @class */ (function () {
     };
     return ColorPicker;
 }());
+//# sourceMappingURL=ColorPicker.js.map

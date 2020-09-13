@@ -43,3 +43,4 @@ var SpriteEditor = /** @class */ (function () {
     };
     return SpriteEditor;
 }());
+//# sourceMappingURL=SpriteEditor.js.map

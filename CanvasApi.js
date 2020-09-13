@@ -39,3 +39,4 @@ var CanvasApi = /** @class */ (function () {
     };
     return CanvasApi;
 }());
+//# sourceMappingURL=CanvasApi.js.map

@@ -152,7 +152,6 @@ const CSS_COLOR_NAMES = [
 
 class Colors {
 
-
     getColorCount() {
         return CSS_COLOR_NAMES.length;
     }
